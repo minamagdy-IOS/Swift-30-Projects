@@ -1,10 +1,4 @@
-# Parent App - Complete API Documentation
 
-**Version:** 1.0  
-**Base URL:** `https://api.parent.eu/api`  
-**Date:** May 23, 2026
-
----
 
 ## Table of Contents
 
@@ -29,26 +23,6 @@ The application uses a role-based access control (RBAC) system with three primar
 ### 1. Parent (Contact) Role
 
 **Description:** Parents or guardians linked to one or more children in the institution.
-
-**Key Permissions:**
-- `view_my_newsfeed` - View personal newsfeed
-- `view_child_profile` - View child's profile information
-- `view_child_gallery` - Access child's photos/videos
-- `view_child_daily_report` - View daily status reports
-- `view_child_calendar` - View child-specific calendar events
-- `view_my_calendar` - View personal calendar
-- `receive_messages` - Receive messages from staff
-- `send_message` - Send messages to staff (if enabled)
-- `reply_on_event` - Respond to calendar events
-- `report_vacation` - Report child vacation/absence
-- `report_sick` - Report child sick leave
-- `view_invoice` - View billing invoices
-- `view_child_contacts` - View child's emergency contacts
-- `view_child_permissions_list` - View permissions granted to child
-- `view_child_pickup_info` - View authorized pickup persons
-- `edit_child_permission_reply` - Respond to permission requests
-- `view_child_journey` - View child development journey (if enabled)
-
 **Access Restrictions:**
 - Cannot view institution-wide newsfeed (only child-related posts)
 - Cannot create posts (may submit for approval based on institution settings)
@@ -67,51 +41,6 @@ The application uses a role-based access control (RBAC) system with three primar
 ### 2. Staff Role
 
 **Description:** Teachers, caregivers, and administrative staff working at the institution.
-
-**Key Permissions:**
-
-**Newsfeed & Communication:**
-- `view_institute_newsfeed` - View all posts in institution
-- `post_news_feed` - Create posts
-- `post_news_feed_without_approval` - Post without approval
-- `edit_newsfeed` - Edit own posts
-- `delete_newsfeed` - Delete own posts
-- `receive_messages` - Receive messages
-- `send_message` - Send messages to parents/staff
-
-**Child Management:**
-- `view_child_profile` - View all child profiles
-- `edit_child_profile_information` - Edit child basic info
-- `report_edit_child_actions_status` - Record daily statuses
-- `view_child_statuses_history` - View status history
-- `checkin_checkout_child` - Check-in/out children
-- `view_child_health_info` - View health information
-- `edit_child_health_info` - Update health records
-- `register_staff_statuses` - Record own attendance
-
-**Calendar & Events:**
-- `view_institute_calendar` - View full calendar
-- `create_event` - Create events
-- `edit_event` - Edit events
-- `delete_event` - Delete events
-- `view_event_replies` - View parent responses
-- `create_activity` - Create activities
-- `edit_activity` - Edit activities
-
-**Child Development (if enabled):**
-- `send_directly_observation` - Post observations directly
-- `send_for_review_observation` - Submit observations for review
-- `edit_observation` - Edit observations
-- `delete_observation` - Delete observations
-- `view_child_journey` - View development journey
-- `add_next_steps` - Add development goals
-
-**Classroom Management:**
-- `view_class_details` - View classroom details
-- `view_class_children` - View classroom roster
-- `add_child_to_class` - Assign children to class
-- `manage_room_planning` - Manage room schedules
-
 **Access Restrictions:**
 - Cannot access billing/financial data (unless specific permission)
 - Cannot modify institution settings
@@ -129,88 +58,12 @@ The application uses a role-based access control (RBAC) system with three primar
 ### 3. Admin Role
 
 **Description:** Institution administrators with elevated privileges.
-
-**Inherits All Staff Permissions, Plus:**
-
-**User Management:**
-- `create_institute_user` - Create new users
-- `create_institute_role` - Create custom roles
-- `edit_institute_role` - Modify roles
-- `delete_institute_role` - Delete roles
-- `assign_role_to_user` - Assign roles to users
-- `lock_staff_member` - Lock/unlock staff accounts
-- `view_staff_profile` - View all staff profiles
-- `create_staff` - Add new staff members
-- `edit_staff` - Edit staff information
-
-**Billing & Financial:**
-- `view_payers` - View all payers
-- `add_payer` - Add new payers
-- `create_invoice` - Generate invoices
-- `create_payment` - Record payments
-- `create_refund` - Process refunds
-- `view_products` - View billing products
-- `create_plan` - Create billing plans
-- `manage_adhoc` - Manage ad-hoc charges
-- `manage_discounts` - Manage discounts
-- `invoice_settings` - Configure invoice settings
-
-**System Administration:**
-- `manage_institute_options` - Configure institution settings
-- `manage_institute_tools` - Enable/disable modules
-- `view_admin_dashboard` - Access admin dashboard
-- `manage_age_groups` - Configure age groups
-- `add_class` - Create classrooms
-- `edit_class` - Modify classrooms
-- `add_group` - Create groups
-- `edit_group` - Modify groups
-
-**Advanced Features:**
-- `manage_child_development_settings` - Configure child development
-- `manage_staff_schedule` - Manage staff schedules
-- `manage_inquiry_about` - Manage inquiries
-- `create_survey` - Create surveys
-- `view_survey_response` - View survey results
-- `manage_food_plan` - Manage meal plans
-
 **Data Scope:**
 - Full access to all data within the institution
 - All children, parents, and staff
 - Financial and billing records
 - System logs and reports
 
----
-
-### Permission Checking System
-
-The application uses a centralized permission checking system (`PermissionCodes` class):
-
-```dart
-// Check single permission
-bool canPost = PermissionCodes.check('post_news_feed');
-
-// Check child-specific permission
-bool canViewProfile = PermissionCodes.checkPermissionGranted(
-  'view_child_profile', 
-  childId
-);
-
-// Check module enabled
-bool isBillingEnabled = PermissionCodes.checkModule(
-  'enabled_apps', 
-  'billing'
-);
-```
-
-### Role Hierarchy
-
-```
-System Admin (Super Admin)
-    ├── Company Admin
-    │   └── Institution Admin
-    │       ├── Staff (various roles)
-    │       └── Parent (Contact)
-```
 
 ---
 
